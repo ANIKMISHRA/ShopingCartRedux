@@ -58,27 +58,23 @@ const Main = () => {
 
       <div className="product-container">
         {data.map((item, index) => (
-          <div key={index} className="product-item text-light ">
+          <div key={index} className="product-item text-secondary ">
             <img
               width="370px"
               height="370px"
               src={process.env.PUBLIC_URL + `/productImages/${item.photo}`}
               alt={item.name}
             />
-            <div>Product : {item.name}</div>
-            <div>Category : {item.category}</div>
-            <div>Brand : {item.brand}</div>
-            <div>Price : {item.price}</div>
-            <div>Color : {item.color}</div>
+            <div className="text-start"><h4> ${item.price} </h4></div>
             <div>
               <button
-                className="btn btn-outline-dark mx-1 btn-sm"
+                className="btn btn-outline-secondary mx-1 btn-sm"
                 onClick={() => handleAddToCart(item)}
               >
                 Add to Cart
               </button>
               <button
-                className="btn btn-outline-dark btn-sm"
+                className="btn btn-outline-secondary btn-sm"
                 onClick={() => handleRemoveFromCart(item.id)}
               >
                 Remvoe from Cart

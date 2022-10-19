@@ -91,13 +91,14 @@ const Header = () => {
 
   return (
     <div className="header">
-      <Link to="/">
-        <h1 className="logo text-dark">
-          {" "}
-          <FaShoppingBag />
-          QuickShop
-        </h1>
-      </Link>
+      <a href="/" className="text-dark">
+      <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        
+         <h3><FaShoppingBag />QuickShop</h3>
+      </a>
       <div>
         <div className="search-icon mx-3 ">
           <FaSearch />
@@ -145,10 +146,10 @@ const Header = () => {
                 width: "20px",
                 height: "20px",
                 color: "white",
-                top: "-13px",
+                top: "3px",
                 borderRadius: "50%",
                 backgroundColor: "red",
-                left: "41px",
+                left: "-59px",
               }}
             >
               {result.length}
