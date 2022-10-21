@@ -9,6 +9,7 @@ import { productList } from "../redux/productAction";
 // Components
 import { ErrorMessages } from "../common/ErrorMessage";
 import Slider from "./Slider";
+import { Link } from "react-router-dom";
 
 /**
  *
@@ -59,12 +60,12 @@ const Main = () => {
       <div className="product-container">
         {data.map((item, index) => (
           <div key={index} className="product-item text-secondary ">
-            <img
+            <Link to={`/detailpage/${item.id}`}><img
               width="370px"
               height="370px"
               src={process.env.PUBLIC_URL + `/productImages/${item.photo}`}
               alt={item.name}
-            />
+            /></Link>
             <div className="text-start"><h4> ${item.price} </h4></div>
             <div>
               <button

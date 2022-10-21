@@ -5,9 +5,9 @@ const Cart = () => {
   const cartItems = useSelector((state) => state.cartData);
   const amount =
     cartItems.length &&
-    cartItems.map((item) => item.price).reduce((prev, next) => prev + next);
+    cartItems.map((item) => item.price).reduce((prev, next) => parseInt(prev) + parseInt(next));
 
-
+console.log("CartItems", cartItems);
   return (
     <div>
       <div className="text-start mx-4">
@@ -30,13 +30,13 @@ const Cart = () => {
           <tbody>
             {cartItems.map((item) => (
               <tr key={item.id}>
-                <img
+              <td><img
               width="300px"
               height="200px"
               src={process.env.PUBLIC_URL + `/productImages/${item.photo}`}
               alt={item.name}
               className="mt-3"
-            />
+            /></td>
                 <td>{item.name}</td>
                 <td>{item.color}</td>
                 <td>{item.price}</td>

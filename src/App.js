@@ -12,6 +12,7 @@ import Login from "./authentication/Login";
 import { useState } from "react";
 import Profile from "./components/profile";
 import AddProduct from "./components/AddProduct";
+import ProductDetailPage from "./components/ProductDetailPage";
 
 const App = () => {
 
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/cart" element={ <Cart />} />
         <Route path="/profile" element={  lsData.email && lsData.password ? <Profile /> : <Login />} />
         <Route path="/addproduct" element={ lsData.email && lsData.password ? <AddProduct /> : <Login /> } />
+        <Route path="/detailpage/:id" element={<ProductDetailPage />} />
       </Routes>
     </div>
   );

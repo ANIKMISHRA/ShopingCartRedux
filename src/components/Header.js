@@ -146,7 +146,7 @@ const Header = () => {
                 width: "20px",
                 height: "20px",
                 color: "white",
-                top: "3px",
+                top: "0px",
                 borderRadius: "50%",
                 backgroundColor: "red",
                 left: "-59px",
