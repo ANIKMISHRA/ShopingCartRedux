@@ -55,7 +55,7 @@ const Main = () => {
   return (
     <div>
       <Slider />
-      <h1 className="text-start text-light" style={{margin: "15px"}}>Products</h1>
+      <h1 className="text-start text-dark" style={{margin: "15px"}}>Products</h1>
 
       <div className="product-container">
         {data.map((item, index) => (
@@ -66,16 +66,16 @@ const Main = () => {
               src={process.env.PUBLIC_URL + `/productImages/${item.photo}`}
               alt={item.name}
             /></Link>
-            <div className="text-start"><h4> ${item.price} </h4></div>
+            <div className="text-start"><h4>₹{item.price}.00 </h4></div>
             <div>
               <button
-                className="btn btn-outline-secondary mx-1 btn-sm"
+                className="btn btn-outline-secondary mx-1 btn-sm rounded-circle"
                 onClick={() => handleAddToCart(item)}
               >
                 Add to Cart
               </button>
               <button
-                className="btn btn-outline-secondary btn-sm"
+                className="btn btn-outline-secondary btn-sm rounded-circle"
                 onClick={() => handleRemoveFromCart(item.id)}
               >
                 Remvoe from Cart

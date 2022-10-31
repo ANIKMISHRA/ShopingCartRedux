@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 // React bootstrap's components
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal"
 
 // component
 import { registerUser } from "../redux/authAction";
@@ -25,9 +26,9 @@ const initialValues = {
  * Method to handle create new account
  * @returns node
  */
-const Register = () => {
+const Register = ({show, Hide}) => {
 
-  const navigate = useNavigate();
+ // const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -42,14 +43,19 @@ const Register = () => {
 
       onSubmit: (values) => {
         dispatch(registerUser(values));
-        navigate('/login')
+        Hide();
       },
     });
 
   return (
     <div className="container text-start register-form">
-      <h1 className="text-center">Register User</h1>
-      <Form onSubmit={handleSubmit}>
+      <Modal show={show} onHide={Hide}>
+        <Modal.Header>
+          <Modal.Title>Create Account</Modal.Title>
+         
+        </Modal.Header>
+        <Modal.Body>
+        <Form>
         <Form.Group className="mb-2" controlId="formBasicFirstName">
           <Form.Label>First Name</Form.Label>
           <Form.Control
@@ -125,14 +131,21 @@ const Register = () => {
             </Form.Label>
           ) : null}
         </Form.Group>
-        <Button className="mt-4 " variant="dark" type="submit">
-          Submit
-        </Button>
-      </Form>
-      <p className="text-center">
+        <p>
         {" "}
         If you have already an account <Link to="/login"> log In </Link>...
       </p>
+      </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="dark" onClick={handleSubmit}>
+            Create
+          </Button>
+          <Button variant="secondary" onClick={Hide}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

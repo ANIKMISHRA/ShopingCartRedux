@@ -20,6 +20,8 @@ import { ErrorMessages } from "../common/ErrorMessage";
 
 // React Bootstrap's Component
 import Modal from "react-bootstrap/Modal";
+import Login from "../authentication/Login";
+import Register from "../authentication/Register";
 
 /**
  * Method to handle the header portion
@@ -37,14 +39,26 @@ const Header = () => {
   const result = useSelector((state) => state.cartData);
 
   // State
-  const [lgShow, setLgShow] = useState(false);
+  const [profileModelShow, setProfileModelShow] = useState(false);
 
   /**
    * Method to handle profile model visibility.
    */
   const handleEditClick = () => {
-    setLgShow(false);
+    setProfileModelShow(false);
   };
+
+  const [loginModelShow, setLoginModelShow] = useState(false);
+  const [registerModelShow, setRegisterModelShow] = useState(false);
+
+  const handleClose = () => {
+     setLoginModelShow(false); 
+     setRegisterModelShow(false);
+    }
+  const handleShow = () => setLoginModelShow(true);
+
+  const handleRegisterModelShow = () => setRegisterModelShow(true);
+  
 
   /**
    * Method to handle on logout
@@ -114,7 +128,7 @@ const Header = () => {
           {localStorage.getItem("email") && localStorage.getItem("password") ? (
             <Link
               to="/addproduct"
-              className="btn btn-outline-light btn-sm text-dark mt-4 mx-5"
+              className="btn btn-outline-light btn-sm text-dark mt-4 mx-5 rounded-circle"
             >
               Add Product
             </Link>
@@ -129,9 +143,9 @@ const Header = () => {
           )}
         </div>
 
-        <div className="profile-icon mx-3">
+        <div className="profile-icon mx-3 border border-light rounded-circle">
           {localStorage.getItem("email") && localStorage.getItem("password") ? (
-            <FaUserCheck onClick={() => setLgShow(true)} />
+            <FaUserCheck onClick={() => setProfileModelShow(true)} />
           ) : (
             <FaUserAltSlash onClick={() => ErrorMessages()} />
           )}
@@ -166,7 +180,7 @@ const Header = () => {
       <div className="signup-btn mt-5">
         {localStorage.getItem("email") && localStorage.getItem("password") ? (
           <Link
-            className="text-danger btn btn-sm border border-light"
+            className="text-danger btn btn-sm border border-light rounded-circle"
             to="/"
             aria-current="page"
             onClick={handleOnLogout}
@@ -175,32 +189,34 @@ const Header = () => {
           </Link>
         ) : (
           <Link
-            className=" text-dark btn btn-sm border border-light"
+            className=" text-dark btn btn-sm border border-light rounded-circle"
             aria-current="page"
-            to="/login"
+            onClick={handleShow}
           >
             Log In
           </Link>
         )}
         <Link
-          className=" text-dark mx-2 btn btn-sm border border-light"
+          className=" text-dark mx-2 btn btn-sm border border-light rounded-circle"
           aria-current="page"
-          to="/register"
+          onClick={handleRegisterModelShow}
         >
           Sign Up
         </Link>
 
         <b
-          className="btn btn-sm border border-light mx-5"
+          className="btn btn-sm border border-light mx-5 rounded-circle"
           onClick={() => handleEmptyCart()}
         >
           Empty Cart
         </b>
       </div>
+      <Login show={loginModelShow} Hide={handleClose} />
+      <Register show={registerModelShow} Hide={handleClose} />
       <Modal
         size="xl"
-        show={lgShow}
-        onHide={() => setLgShow(false)}
+        show={profileModelShow}
+        onHide={() => setProfileModelShow(false)}
         aria-labelledby="example-modal-sizes-title-lg"
       >
         <Modal.Header>

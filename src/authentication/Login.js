@@ -1,5 +1,5 @@
 // NPM Packages
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
@@ -14,9 +14,7 @@ import { loginSchema } from "../schemas";
 // React Bootstrap's cComponents
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-
-// React Icons
-import { BsEmojiSmileFill } from "react-icons/bs";
+import Modal from 'react-bootstrap/Modal';
 
 // Const
 const initialValues = {
@@ -28,7 +26,7 @@ const initialValues = {
  * Method to handle the user login.
  * @returns node
  */
-const Login = () => {
+const Login = ({show, Hide}) => {
 
   // To navigate one component to another 'useNavigate' hook used.
   const navigate = useNavigate();
@@ -61,6 +59,7 @@ const Login = () => {
             timer: 4000,
           });
           navigate("/");
+          Hide();
         } else {
           Swal.fire({
             position: "top-right",
@@ -82,11 +81,18 @@ const Login = () => {
 
   return (
     <div className="container text-start register-form">
-      <h5 className="mx-5 pt-2 font-italic text-secondary">
+      {/* <h5 className="mx-5 pt-2 font-italic text-secondary">
         Welcome to QuickShop once again {<BsEmojiSmileFill />}
-      </h5>
-      <h1 className="text-center mt-4">Login </h1>
-      <Form className="mt-4 " onSubmit={handleSubmit}>
+      </h5> */}
+      <Modal show={show} onHide={Hide}   centered>
+        <Modal.Header>
+          <Modal.Title>Login</Modal.Title>
+          <p className="text-end">
+        Create a new account <Link to="/register">sign up</Link>...
+      </p>
+        </Modal.Header>
+        <Modal.Body>
+        <Form className="mt-4 " >
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -119,13 +125,18 @@ const Login = () => {
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Check me out" />
         </Form.Group>
-        <Button variant="dark" className="mt-4 " type="submit">
+      </Form>
+        </Modal.Body>
+        <Modal.Footer>
+      
+          <Button variant="dark" onClick={handleSubmit}>
           Login
         </Button>
-      </Form>
-      <p className="text-center">
-        Create a new account <Link to="/register">sign up</Link>...
-      </p>
+        <Button variant="secondary" onClick={Hide}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

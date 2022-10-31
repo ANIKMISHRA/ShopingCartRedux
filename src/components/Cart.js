@@ -1,13 +1,21 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { removeFromCart } from "../redux/action";
 
 const Cart = () => {
+
+  const dispatch = useDispatch();
+
   const cartItems = useSelector((state) => state.cartData);
   const amount =
     cartItems.length &&
     cartItems.map((item) => item.price).reduce((prev, next) => parseInt(prev) + parseInt(next));
 
 console.log("CartItems", cartItems);
+
+const handleRemoveFromCart = (id) => {
+  dispatch(removeFromCart(id))
+}
   return (
     <div>
       <div className="text-start mx-4">
@@ -41,7 +49,8 @@ console.log("CartItems", cartItems);
                 <td>{item.color}</td>
                 <td>{item.price}</td>
                 <td>{item.brand}</td>
-                <td>{item.category}</td>
+                <td>{item.category} </td>
+                <td className="border border-none"><button onClick={() => handleRemoveFromCart(item.id)} className="remove-cart-btn">x</button></td>
               </tr>
             ))}
           </tbody>
