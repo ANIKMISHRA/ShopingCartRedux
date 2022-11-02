@@ -22,6 +22,7 @@ import { ErrorMessages } from "../common/ErrorMessage";
 import Modal from "react-bootstrap/Modal";
 import Login from "../authentication/Login";
 import Register from "../authentication/Register";
+import AddProduct from "./AddProduct";
 
 /**
  * Method to handle the header portion
@@ -50,14 +51,23 @@ const Header = () => {
 
   const [loginModelShow, setLoginModelShow] = useState(false);
   const [registerModelShow, setRegisterModelShow] = useState(false);
+  const [productModelShow, setProductModelShow] = useState(false);
 
-  const handleClose = () => {
+  const handleCloseLoginMdl = () => {
      setLoginModelShow(false); 
-     setRegisterModelShow(false);
     }
+
+    const handleCloseRegisterMdl = () => {
+      setRegisterModelShow(false);
+     }
+
+     const handleCloseProductMdl = () => setProductModelShow(false);
+
   const handleShow = () => setLoginModelShow(true);
 
   const handleRegisterModelShow = () => setRegisterModelShow(true);
+
+  const handleShowProductModal = () => setProductModelShow(true);
   
 
   /**
@@ -127,20 +137,12 @@ const Header = () => {
         <div className="add-btn mx-5">
           {localStorage.getItem("email") && localStorage.getItem("password") ? (
             <Link
-              to="/addproduct"
+            onClick={handleShowProductModal}
               className="btn btn-outline-light btn-sm text-dark mt-4 mx-5 rounded-circle"
             >
               Add Product
             </Link>
-          ) : (
-            <Link
-              to="/login"
-              className="btn btn-outline-light btn-sm text-dark border border-light mt-4 mx-5"
-              onClick={handleErrorMessage}
-            >
-              Add Product
-            </Link>
-          )}
+          ) : ''}
         </div>
 
         <div className="profile-icon mx-3 border border-light rounded-circle">
@@ -211,8 +213,9 @@ const Header = () => {
           Empty Cart
         </b>
       </div>
-      <Login show={loginModelShow} Hide={handleClose} />
-      <Register show={registerModelShow} Hide={handleClose} />
+      <Login show={loginModelShow} handleShow={setRegisterModelShow} Hide={handleCloseLoginMdl} />
+      <Register show={registerModelShow} handleShow={setLoginModelShow} Hide={handleCloseRegisterMdl} />
+      <AddProduct show = {productModelShow} Hide={handleCloseProductMdl} />
       <Modal
         size="xl"
         show={profileModelShow}

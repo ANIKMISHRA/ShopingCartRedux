@@ -6,8 +6,6 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Cart from "./components/Cart";
-import Register from "./authentication/Register";
-import Login from "./authentication/Login";
 import Profile from "./components/profile";
 import AddProduct from "./components/AddProduct";
 import ProductDetailPage from "./components/ProductDetailPage";
@@ -28,16 +26,14 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<Cart />} />
         <Route
           path="/profile"
-          element={lsData.email && lsData.password ? <Profile /> : <Login />}
+          element={lsData.email && lsData.password ? <Profile /> : ''}
         />
         <Route
           path="/addproduct"
-          element={lsData.email && lsData.password ? <AddProduct /> : <Login />}
+          element={lsData.email && lsData.password ? <AddProduct /> : ''}
         />
         <Route path="/detailpage/:id" element={<ProductDetailPage />} />
       </Routes>

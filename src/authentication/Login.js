@@ -15,6 +15,7 @@ import { loginSchema } from "../schemas";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from 'react-bootstrap/Modal';
+import { FaShoppingBag } from "react-icons/fa";
 
 // Const
 const initialValues = {
@@ -26,7 +27,7 @@ const initialValues = {
  * Method to handle the user login.
  * @returns node
  */
-const Login = ({show, Hide}) => {
+const Login = ({show, Hide, handleShow, handleClose}) => {
 
   // To navigate one component to another 'useNavigate' hook used.
   const navigate = useNavigate();
@@ -79,18 +80,24 @@ const Login = ({show, Hide}) => {
     dispatch(loginUser());
   }, []);
 
+  const openRegisterModal = () => {
+    handleShow(true);
+    Hide();
+  }
+
   return (
     <div className="container text-start register-form">
       {/* <h5 className="mx-5 pt-2 font-italic text-secondary">
         Welcome to QuickShop once again {<BsEmojiSmileFill />}
       </h5> */}
       <Modal show={show} onHide={Hide}   centered>
-        <Modal.Header>
-          <Modal.Title>Login</Modal.Title>
+        <Modal.Header className="bg-dark text-light">
+          <Modal.Title><FaShoppingBag />QuickShop</Modal.Title>
           <p className="text-end">
-        Create a new account <Link to="/register">sign up</Link>...
+        Create a new account <Link onClick={() => openRegisterModal()}>sign up</Link>...
       </p>
         </Modal.Header>
+        <h3 className="text-center mt-4"> Great to have you back!</h3>
         <Modal.Body>
         <Form className="mt-4 " >
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -103,9 +110,9 @@ const Login = ({show, Hide}) => {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          {errors.email && touched.email ? (
+          {errors.email && touched.email && show ? (
             <Form.Label className="text-danger">{errors.email}</Form.Label>
-          ) : null}
+          ) : touched.email = '' }
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -118,9 +125,9 @@ const Login = ({show, Hide}) => {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          {errors.password && touched.password ? (
+          {errors.password && touched.password && show ? (
             <Form.Label className="text-danger">{errors.password}</Form.Label>
-          ) : null}
+          ) : touched.password = ''}
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Check me out" />
@@ -133,8 +140,13 @@ const Login = ({show, Hide}) => {
           Login
         </Button>
         <Button variant="secondary" onClick={Hide}>
-            Close
+            Cancel
           </Button>
+        </Modal.Footer>
+        <Modal.Footer>
+          <p className="text-secondary mx-4">QuickShop collects and uses personal
+             data in accordance with our Privacy Policy. By creating an account, you agree to our 
+             Terms & Conditions.</p>
         </Modal.Footer>
       </Modal>
     </div>

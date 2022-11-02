@@ -12,6 +12,7 @@ import Modal from "react-bootstrap/Modal"
 // component
 import { registerUser } from "../redux/authAction";
 import { signUpSchema } from "../schemas";
+import { FaShoppingBag } from "react-icons/fa";
 
 // Const
 const initialValues = {
@@ -26,7 +27,7 @@ const initialValues = {
  * Method to handle create new account
  * @returns node
  */
-const Register = ({show, Hide}) => {
+const Register = ({show, handleShow,  Hide}) => {
 
  // const navigate = useNavigate();
 
@@ -47,13 +48,18 @@ const Register = ({show, Hide}) => {
       },
     });
 
+    const openLoginModel = () => {
+      handleShow(true);
+      Hide();
+    }
+
   return (
     <div className="container text-start register-form">
       <Modal show={show} onHide={Hide}>
-        <Modal.Header>
-          <Modal.Title>Create Account</Modal.Title>
-         
+        <Modal.Header className="bg-dark">
+          <Modal.Title className="text-light"><FaShoppingBag />QuickShop</Modal.Title>
         </Modal.Header>
+        <h3 className="text-center mt-4">Great to see you here!</h3>
         <Modal.Body>
         <Form>
         <Form.Group className="mb-2" controlId="formBasicFirstName">
@@ -66,9 +72,9 @@ const Register = ({show, Hide}) => {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          {errors.first_name && touched.first_name ? (
+          {errors.first_name && touched.first_name && show ? (
             <Form.Label className="text-danger">{errors.first_name}</Form.Label>
-          ) : null}
+          ) : touched.first_name = ''}
         </Form.Group>
 
         <Form.Group className="mb-2" controlId="formBasicLastName">
@@ -81,9 +87,9 @@ const Register = ({show, Hide}) => {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          {errors.last_name && touched.last_name ? (
+          {errors.last_name && touched.last_name && show ? (
             <Form.Label className="text-danger">{errors.last_name}</Form.Label>
-          ) : null}
+          ) : touched.last_name = ''}
         </Form.Group>
 
         <Form.Group className="mb-2" controlId="formBasicEmail">
@@ -96,9 +102,9 @@ const Register = ({show, Hide}) => {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          {errors.email && touched.email ? (
+          {errors.email && touched.email && show ? (
             <Form.Label className="text-danger">{errors.email}</Form.Label>
-          ) : null}
+          ) : touched.email = ''}
         </Form.Group>
 
         <Form.Group className="mb-2" controlId="formBasicPassword">
@@ -111,9 +117,9 @@ const Register = ({show, Hide}) => {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          {errors.password && touched.password ? (
+          {errors.password && touched.password && show ? (
             <Form.Label className="text-danger">{errors.password}</Form.Label>
-          ) : null}
+          ) : touched.password = ''}
         </Form.Group>
         <Form.Group className="mb-2" controlId="formBasicPassword">
           <Form.Label>Confirm Password</Form.Label>
@@ -125,25 +131,30 @@ const Register = ({show, Hide}) => {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          {errors.confirm_password && touched.confirm_password ? (
+          {errors.confirm_password && touched.confirm_password && show ? (
             <Form.Label className="text-danger">
               {errors.confirm_password}
             </Form.Label>
-          ) : null}
+          ) : touched.confirm_password = ''}
         </Form.Group>
         <p>
         {" "}
-        If you have already an account <Link to="/login"> log In </Link>...
+        If you have already an account <Link onClick={openLoginModel}> log In </Link>...
       </p>
       </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="dark" onClick={handleSubmit}>
-            Create
+            Create Account
           </Button>
           <Button variant="secondary" onClick={Hide}>
-            Close
+            Cancel
           </Button>
+        </Modal.Footer>
+        <Modal.Footer>
+        <p className="text-secondary mx-4">QuickShop collects and uses personal
+             data in accordance with our Privacy Policy. By creating an account, you agree to our 
+             Terms & Conditions.</p>
         </Modal.Footer>
       </Modal>
     </div>
