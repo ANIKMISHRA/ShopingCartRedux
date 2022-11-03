@@ -12,7 +12,7 @@ const images = [
 
 const Slider = () => {
   return (
-    <div>
+    <div className="slider">
       <SimpleImageSlider
         width={1830}
         height={604}

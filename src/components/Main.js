@@ -58,7 +58,7 @@ const Main = () => {
       <h1 className="text-start text-dark" style={{margin: "15px"}}>Products</h1>
 
       <div className="product-container">
-        {data.map((item, index) => (
+        {data.sort((a,b) => a.id > b.id ? 1 : -1).map((item, index) => (
           <div key={index} className="product-item text-secondary ">
             <Link to={`/detailpage/${item.id}`}><img
               width="370px"

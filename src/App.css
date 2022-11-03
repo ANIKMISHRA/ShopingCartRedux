@@ -5,9 +5,11 @@
 body{
   width: 1830px;
   height: 100%;
-  margin: auto;
-  padding: 0;
-  
+  /* margin: auto;
+  padding: 0; */
+  background-image: url("https://www.dominionjewelers.com/wp-content/uploads/2017/09/iStock-679771862-300x177.jpg");
+  background-repeat: no-repeat;
+  /* background-size: 100% 100%; */
 }
 /* header style */
 .header {
@@ -143,9 +145,9 @@ body{
   float: left;
 }
 .search-box input {
-  width: 124%;
+  width: 133%;
   float: left;
-  height: 40px;
+  height: 45px;
   border: 1px solid #ddd;
   padding-left: 10px;
   font-size: 15px;
@@ -181,7 +183,7 @@ body{
   border-radius: 10%;
 }
 .product-item img:hover {
-  opacity: 0.8;
+  /* opacity: 0.8; */
   zoom: 1;
 }
 .search-icon {
@@ -573,4 +575,5 @@ img:hover{
 }
 
 /* Footer Csss end */
+
 

@@ -10,7 +10,7 @@ const Profile = () => {
   const authData = useSelector((state) => state.authData.editUser);
   console.log("authDAta", authData);
 
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState([]);
 
   React.useEffect(() => {
     dispatch(editUserProfile());
